@@ -2,13 +2,17 @@ import React, {Fragment, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {useSelector, useDispatch} from 'react-redux';
-import {SignUpUser, userSelector, clearState} from './UserSlice';
+import {SignUpUser, userSelector, clearState} from '../../Api/UserSlice';
 import {useHistory} from 'react-router-dom';
-import toast from 'react-hot-toast';
+import Input from '../../Components/Input';
+import Button from '../../Components/Button';
+import User from '../../assets/user.svg';
+import Form from "../../Components/Form";
+import Header from "../Header";
 
 const SignUp = () => {
     const dispatch = useDispatch();
-    const {register, errors, handleSubmit} = useForm();
+    const {register, handleSubmit, formState: {errors}, reset} = useForm();
     const history = useHistory();
 
     const {isFetching, isSuccess, isError, errorMessage} = useSelector(
@@ -38,97 +42,74 @@ const SignUp = () => {
             dispatch(clearState());
             history.push('/');
         }
-
-        if (isError) {
-            toast.error(errorMessage);
-            dispatch(clearState());
-        }
-    }, [isSuccess, isError]);
+    }, [isSuccess]);
 
     return (
-        <Fragment>
-            <div className="container col-sm-4">
-                <h3>Sign Up </h3>
-                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                    <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                        <form
-                            onSubmit={handleSubmit(onSubmit)}
-                            method="POST"
-                        >
-                            <div className="form-group">
-                                <label htmlFor="email">Name</label>
+            <div className="main-container">
+                <Header><div className="form-header">Register</div></Header>
+                <div className={"form-container"}>
+                    <Form
+                        onSubmit={handleSubmit(onSubmit)}
+                        method="POST"
+                    >
+                        <img src={User} alt="User" style={{"paddingBottom":"33px"}}/>
+                        <div className="error-alert">{isError && errorMessage}</div>
+                        <div className={"form-col"}>
+                            <label htmlFor="email">
+                                First Name</label>
 
-                                <input
-                                    className="form-control"
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    // ref={register({ required: true })}
-                                    autoComplete="name"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <div className="form-group">
-                                    <label htmlFor="email">email</label>
-                                    <input
-                                        className="form-control"
-                                        id="email"
-                                        name="email"
-                                        {...register("email", {
-                                            required: "required",
-                                            // pattern: {
-                                            //     value: /S+@S+.S+/,
-                                            //     message: "Entered value does not match email format"
-                                            // }
-                                        })}
-                                        type="email"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <input
-                                    className="form-control"
-                                    id="password"
-                                    name="password"
-                                    {...register("password", {
-                                        required: "required",
-                                        minLength: {
-                                            value: 5,
-                                            message: "min length is 5"
-                                        }
-                                    })}
-                                    type="password"
-                                />
-                            </div>
-
-                            <div>
-                                <button
-                                    type="submit"
-                                    className="btn btn-primary btn-block"
-                                >
-
-                                         Sign up
-
-                                </button>
-                            </div>
-                        </form>
-                        <div className="mt-6">
-                            <div className="relative">
-                                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">
-                    Or <Link to="login"> Login</Link>
-                  </span>
-                                </div>
-                            </div>
+                            <Input
+                                className="form-control"
+                                id="name"
+                                name="name"
+                                type="text"
+                                register={register}
+                                autoComplete="name"
+                                required
+                            />
+                            {errors.name && <span className="error-alert">{"Please enter name"}</span>}
                         </div>
-                    </div>
+                        <div className={"form-col"}>
+                            <label htmlFor="email">
+                                Email Address</label>
+                            <Input
+                                className="form-control"
+                                id="email"
+                                name="email"
+                                register={register}
+                                type="email"
+                            />
+                            {errors.email && <span className="error-alert">{"Please enter email"}</span>}
+                        </div>
+
+
+                        <div className={"form-col"}>
+                            <label htmlFor="password">Password</label>
+                            <Input className="form-control"
+                                   id="password"
+                                   name="password"
+                                   register={register}
+                                   type="password"
+                            />
+                            {errors.password && <span className="error-alert">{"Please enter password"}</span>}
+                        </div>
+
+                        <div className="form-submit">
+                            <Button type="submit">
+                                Register
+                            </Button>
+                        </div>
+                        <div>
+                            {!isFetching ?
+                                <Link to="login">Already have an account? Go to log in</Link> :
+                                <span style={{color: "#c6c6c6"}}>Already have an account? Go to log in</span>}
+                        </div>
+                    </Form>
+
+
                 </div>
             </div>
-        </Fragment>
-    );
+);
 };
 
 export default SignUp;

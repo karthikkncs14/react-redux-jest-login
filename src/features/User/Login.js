@@ -2,10 +2,13 @@ import React, {Fragment, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {useSelector, useDispatch} from 'react-redux';
-import {loginUser, userSelector, clearState} from './UserSlice';
-import toast from 'react-hot-toast';
+import {loginUser, userSelector, clearState} from '../../Api/UserSlice';
 import {useHistory} from 'react-router-dom';
-
+import Input from '../../Components/Input';
+import Button from '../../Components/Button';
+import User from '../../assets/user.svg';
+import Form from "../../Components/Form";
+import Header from "../Header";
 
 const Login = ({}) => {
     const dispatch = useDispatch();
@@ -31,74 +34,50 @@ const Login = ({}) => {
     }, []);
 
     useEffect(() => {
-        if (isError) {
-            toast.error(errorMessage);
-            dispatch(clearState());
-        }
-
         if (isSuccess) {
             dispatch(clearState());
             history.push('/');
         }
-    }, [isError, isSuccess]);
+    }, [isSuccess]);
 
     return (
-        <div className="container col-sm-4">
-            {/*<div className="col-sm-4">col-sm-4</div>*/}
-            <h3>Sign in</h3>
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="main-container">
+            <Header><div className="form-header">Login</div></Header>
 
-                <div className="form-group">
-                    <label htmlFor="email">email</label>
-                    <input
-                        className="form-control"
-                        id="email"
-                        name="email"
-                        {...register("email", {
-                            required: "required",
-                            // pattern: {
-                            //     value: /S+@S+.S+/,
-                            //     message: "Entered value does not match email format"
-                            // }
-                        })}
-                        type="email"
-                    />
-                    {errors.email && <span role="alert">{errors.email.message}</span>}
-                </div>
-                <div className="form-group">
-                <label htmlFor="password">password</label>
-                <input
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    {...register("password", {
-                        required: "required",
-                        minLength: {
-                            value: 5,
-                            message: "min length is 5"
-                        }
-                    })}
-                    type="password"
-                />
-                {errors.password && <span role="alert">{errors.password.message}</span>}
-                </div>
-                <div>
-                <button className="btn btn-primary btn-block" type="submit">SUBMIT</button>
-                </div>
+            <div className={"form-container"}>
+                {/*<div className="col-sm-4">col-sm-4</div>*/}
 
-            </form>
-            <div className="mt-6">
-                <div className="relative">
-                    <div className="relative flex justify-center text-sm">
-                                  <span className="forgot-password text-right">
-                    Or <Link to="SignUp"> SignUp</Link>
-                   </span>
+                <Form onSubmit={handleSubmit(onSubmit)}>
+                    <img src={User} alt="User" style={{"paddingBottom":"33px"}}/>
+                    <div className="error-alert">{isError && errorMessage}</div>
+                    <div className={"form-col"}>
+                        <label htmlFor="email">Email address</label>
+                        <Input disabled={isFetching} placeholder={"Email address..."} id="email"
+                               name="email"
+                               register={register}
+                               type="email"/>
+                        {errors.email && <span className="error-alert">{"Please enter email"}</span>}
                     </div>
-                </div>
-            </div>
-                </div>
+                    <div className={"form-col"}>
+                        <label htmlFor="password">Password</label>
+                        <Input disabled={isFetching}  placeholder={"Password..."}
+                               id="password"
+                               name="password"
+                               register={register}
+                               type="password"
+                        />
+                        {errors.password && <span className="error-alert">{"Please enter password"}</span>}
+                    </div>
+                    <div className="form-submit">
+                        <Button disabled={isFetching} type="submit">Login</Button>
+                    </div>
+                    <div>
+                        {!isFetching ?
+                        <Link to="SignUp">No account? registered</Link> :
+                        <span style={{color: "#c6c6c6"}}>No account? registered</span>}
+                    </div>
+
+                </Form>
             </div>
         </div>
     );

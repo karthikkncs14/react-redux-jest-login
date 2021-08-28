@@ -1,0 +1,233 @@
+//@import url(https://fonts.font.im/css2?family=Noto+Sans+SC:wght@300;400&display=swap);
+
+$color-white:         white;
+$color-black:         #000000;
+$color-black-opacity :rgba(0, 0, 0, 0.5);
+$color-dark-grayish:       #42495e;
+$color-dark-gray:        #979797;
+
+$font-family: 'Noto Sans SC';
+$center : center;
+
+.pull-center{
+  justify-content: $center;
+  align-items: $center;
+  display: flex;
+}
+
+.font-300 {
+  font-family: $font-family;
+  font-weight: 300;
+}
+.font-24 {
+  @extend .font-300;
+  font-size: 24px;
+};
+
+label {
+  @extend .font-300;
+  width: auto;
+  height: 33px;
+  margin-top: 36px;
+  font-size: 22px;
+  letter-spacing: 0.96px;
+  color: $color-black;
+}
+
+.form-col {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+form {
+  width: 562px;
+  flex-direction: column;
+  background-color: $color-white;
+  padding: 0 64px 0 64px;
+  box-shadow: 0 2px 4px 0 $color-black;
+  height: 100%;
+  @extend .pull-center;
+}
+
+.form-container{
+  flex: 1;
+  height: 100%;
+  @extend .pull-center;
+}
+
+.item-block{
+  position: relative;
+  width: 30%;
+  height: 225px;
+  margin: 1% 1%;
+  border: solid 1px $color-dark-gray;
+  background-color: $color-white;
+  text-decoration: none;
+  @extend .pull-center;
+}
+
+.form-header{
+  width: 100%;
+  justify-content: center;
+}
+
+.form-submit{
+  margin-top: 80px;
+}
+
+.dashboard-header{
+  @extend .font-24;
+  background-color: $color-white;
+  height: 48px;
+  box-shadow: 0 2px 4px 0 $color-black-opacity;
+  color: $color-dark-grayish;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: $center;
+  z-index: 1;
+}
+.grid-container{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2px;
+  margin: 0 16px 16px 16px;
+  padding-top: 80px;
+  background-color: #f0f0f0;
+}
+
+.format-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.add {
+  font-size: 64px;
+  color: $color-dark-grayish;
+}
+
+.grid-title{
+  @extend .font-24;
+  margin: 12px;
+  text-align: $center;
+  color: $color-dark-grayish;
+}
+
+.grid-date{
+  @extend .font-300;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 18px;
+  text-align: $center;
+  color: $color-dark-grayish;
+  margin: 12px 12px 0 0 ;
+}
+.drop-out{
+  margin-right: 24px;
+  font-family: $font-family;
+  font-size: 14px;
+  text-align: right;
+  color: $color-dark-grayish;
+}
+.user-name{
+  margin-left: 24px;
+  font-family: $font-family;
+  font-size: 14px;
+  color: $color-dark-grayish;
+}
+
+.title-block{
+  height: 47px;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: $center;
+  padding: 103px 24px 0 24px;
+  word-break: break-all;
+}
+.content {
+  background-color: $color-white;
+  height: 100%;
+}
+
+.content-block {
+  @extend .font-300;
+  display: flex;
+  padding: 0px 24px 0 24px;
+  align-items: flex-start;
+  font-size: 28px;
+  letter-spacing: 0.32px;
+  color: $color-dark-grayish;
+  word-break: break-all;
+  text-align: left;
+}
+.item-title {
+  @extend .font-24;
+  @extend .format-text;
+  color: $color-dark-grayish;
+  width: 40%;
+}
+.date {
+  font-family: $font-family;
+  font-size: 32px;
+  letter-spacing: 1.39px;
+  text-align: right;
+  color: $color-black;
+}
+.title {
+  @extend .format-text;
+  @extend .date;
+  width: 80%;
+  text-align: start;
+}
+
+
+.add-new-form{
+  justify-content: flex-start;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: $color-white;
+  padding: 50px 64px 0 64px;
+  width: 93%;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
+}
+.button-end{
+  align-items: flex-start;
+}
+
+.header-middle {
+  width: 40%;
+}
+.main-container {
+  height: 100%;
+}
+.error-alert {
+  color: red;
+}
+
+body {
+  height: 100%;
+  margin: 0px;
+}
+html {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+
+
+
+

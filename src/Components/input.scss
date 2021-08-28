@@ -1,0 +1,43 @@
+$color-white:         white;
+$color-black:         #000000;
+$color-light-gray:    #f3f3f3;
+$color-dark-gray:    #949494;
+
+$base-border:solid 2px;
+$base-margin:13px 0 0;
+$full-width : 100%;
+
+input {
+  width: $full-width;
+  height: 46px;
+  margin: $base-margin;
+  border: $base-border $color-black;
+  background-color: $color-light-gray;
+}
+input:disabled {
+  background-color: $color-light-gray;
+  border: $base-border $color-dark-gray;
+}
+
+input:focus {
+  border: $base-border $color-black;
+  background-color: $color-white;
+}
+
+textarea:disabled {
+  background-color: $color-light-gray;
+  border: $base-border $color-dark-gray;
+}
+
+textarea:focus {
+  border: $base-border $color-black;
+  background-color: $color-white;
+}
+
+textarea {
+  width: $full-width;
+  height: 299px;
+  margin: $base-margin;
+  border: $base-border $color-black;
+  background-color: $color-light-gray;
+}
